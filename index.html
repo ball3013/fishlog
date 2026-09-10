@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>FISHLOG - Digital Fishing Log</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    #27321f 0%,
+                    #101510 45%,
+                    #0b0f0b 100%
+                );
+
+            color: #edf3e5;
+
+            font-family:
+                Arial,
+                "Segoe UI",
+                sans-serif;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+
+            width: 100%;
+
+            padding: 18px 30px;
+
+            background: rgba(20, 27, 19, 0.95);
+
+            border-bottom:
+                1px solid #35422f;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.35);
+        }
+
+
+        /* =========================
+           FISHLOG LOGO
+        ========================= */
+
+        .fishlog-logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .fishlog-icon {
+
+            width: 55px;
+
+            height: 55px;
+
+            filter:
+                drop-shadow(
+                    0 0 8px
+                    rgba(166,255,0,0.25)
+                );
+        }
+
+
+        .fishlog-title {
+
+            font-size: 28px;
+
+            font-weight: 900;
+
+            letter-spacing: 4px;
+
+            color: #edf3e5;
+        }
+
+
+        .fishlog-title span {
+
+            color: #a6ff00;
+        }
+
+
+        .fishlog-subtitle {
+
+            margin-top: 5px;
+
+            font-size: 9px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            color: #778d52;
+        }
+
+
+        /* =========================
+           USER
+        ========================= */
+
+        .user-box {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .user-name {
+
+            color: #a6ff00;
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+
+        .logout-btn {
+
+            border: 1px solid #596b3f;
+
+            background: #1d251c;
+
+            color: #d6ff8a;
+
+            padding: 9px 15px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+
+        .logout-btn:hover {
+
+            background: #3f4e2c;
+
+            color: white;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 35px 20px;
+        }
+
+
+        .page-title {
+
+            margin-bottom: 25px;
+        }
+
+
+        .page-title h1 {
+
+            font-size: 30px;
+
+            letter-spacing: 2px;
+        }
+
+
+        .page-title p {
+
+            margin-top: 8px;
+
+            color: #9ca893;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status-card {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1d251c,
+                    #151b14
+                );
+
+            border: 1px solid #35422f;
+
+            border-left:
+                4px solid #a6ff00;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .status-title {
+
+            font-size: 11px;
+
+            color: #778d52;
+
+            letter-spacing: 2px;
+
+            font-weight: bold;
+        }
+
+
+        .status-value {
+
+            margin-top: 7px;
+
+            color: #a6ff00;
+
+            font-size: 20px;
+
+            font-weight: 900;
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .stat-card {
+
+            background: #1d251c;
+
+            border:
+                1px solid #35422f;
+
+            border-radius: 8px;
+
+            padding: 22px;
+
+            min-height: 130px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .stat-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            top: 0;
+
+            width: 4px;
+
+            height: 100%;
+
+            background: #596b3f;
+        }
+
+
+        .stat-label {
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            color: #9ca893;
+
+            font-weight: bold;
+        }
+
+
+        .stat-number {
+
+            margin-top: 15px;
+
+            font-size: 32px;
+
+            font-weight: 900;
+
+            color: #edf3e5;
+        }
+
+
+        .stat-unit {
+
+            color: #778d52;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           RANKING
+        ========================= */
+
+        .ranking-card {
+
+            background: #1d251c;
+
+            border:
+                1px solid #35422f;
+
+            border-radius: 8px;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .ranking-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+
+        .ranking-header h2 {
+
+            font-size: 20px;
+
+            letter-spacing: 2px;
+        }
+
+
+        .ranking-header span {
+
+            font-size: 10px;
+
+            color: #778d52;
+
+            letter-spacing: 2px;
+        }
+
+
+        .ranking-item {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 15px;
+
+            margin-bottom: 10px;
+
+            background: #222c20;
+
+            border:
+                1px solid #35422f;
+
+            border-radius: 6px;
+        }
+
+
+        .ranking-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .rank-number {
+
+            width: 32px;
+
+            height: 32px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 4px;
+
+            background: #3f4e2c;
+
+            color: #d6ff8a;
+
+            font-weight: 900;
+        }
+
+
+        .fish-name {
+
+            font-weight: bold;
+
+            color: #edf3e5;
+        }
+
+
+        .fish-weight {
+
+            color: #a6ff00;
+
+            font-weight: 900;
+
+            font-size: 18px;
+        }
+
+
+        .empty-ranking {
+
+            padding: 25px;
+
+            text-align: center;
+
+            color: #9ca893;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .actions {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .action-btn {
+
+            padding: 18px;
+
+            border-radius: 7px;
+
+            border:
+                1px solid #596b3f;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #596b3f,
+                    #3f4e2c
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            text-align: center;
+
+            text-decoration: none;
+        }
+
+
+        .action-btn:hover {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #778d52,
+                    #596b3f
+                );
+
+            box-shadow:
+                0 0 15px
+                rgba(166,255,0,0.15);
+        }
+
+
+        .action-btn.primary {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #a6ff00,
+                    #596b3f
+                );
+
+            color: #101510;
+
+            border-color: #a6ff00;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            color: #596b3f;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            header {
+
+                padding: 15px;
+
+            }
+
+
+            .fishlog-icon {
+
+                width: 45px;
+
+                height: 45px;
+            }
+
+
+            .fishlog-title {
+
+                font-size: 21px;
+
+                letter-spacing: 2px;
+            }
+
+
+            .fishlog-subtitle {
+
+                font-size: 7px;
+            }
+
+
+            .user-name {
+
+                display: none;
+            }
+
+
+            .stats {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .actions {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            main {
+
+                padding:
+                    25px 15px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <!-- FISHLOG LOGO -->
+
+    <div class="fishlog-logo">
+
+        <svg
+            class="fishlog-icon"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <!-- Tactical Frame -->
+
+            <path
+                d="M50 5 L88 27 L88 73 L50 95 L12 73 L12 27 Z"
+                fill="none"
+                stroke="#596b3f"
+                stroke-width="4"/>
+
+
+            <!-- Fish -->
+
+            <path
+                d="
+                M22 50
+                C35 30 60 27 76 43
+                L90 33
+                L83 49
+                L90 67
+                L76 56
+                C60 73 35 70 22 50
+                Z
+                "
+                fill="#596b3f"
+                stroke="#a6ff00"
+                stroke-width="3"/>
+
+
+            <!-- Eye -->
+
+            <circle
+                cx="69"
+                cy="45"
+                r="3"
+                fill="#a6ff00"/>
+
+
+            <!-- Digital Lines -->
+
+            <path
+                d="M14 50 H30"
+                stroke="#a6ff00"
+                stroke-width="3"/>
+
+
+            <path
+                d="M70 20 H84"
+                stroke="#a6ff00"
+                stroke-width="2"/>
+
+
+            <path
+                d="M70 80 H84"
+                stroke="#a6ff00"
+                stroke-width="2"/>
+
+        </svg>
+
+
+        <div>
+
+            <div class="fishlog-title">
+
+                FISH<span>LOG</span>
+
+            </div>
+
+
+            <div class="fishlog-subtitle">
+
+                DIGITAL FISHING LOG
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- USER -->
+
+    <div class="user-box">
+
+        <div
+            id="currentUserName"
+            class="user-name">
+
+            USER
+
+        </div>
+
+
+        <button
+            class="logout-btn"
+            onclick="logoutUser()">
+
+            LOGOUT
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+    <div class="page-title">
+
+        <h1>DASHBOARD</h1>
+
+        <p>
+            ระบบบันทึกและจัดเก็บประวัติการตกปลาส่วนตัว
+        </p>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="status-card">
+
+        <div class="status-title">
+
+            SYSTEM STATUS
+
+        </div>
+
+
+        <div class="status-value">
+
+            ● ACTIVE
+
+        </div>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+
+                TOTAL FISH
+
+            </div>
+
+
+            <div
+                id="totalFish"
+                class="stat-number">
+
+                0
+
+            </div>
+
+
+            <div class="stat-unit">
+
+                ตัว
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+
+                BIGGEST FISH
+
+            </div>
+
+
+            <div
+                id="biggestFish"
+                class="stat-number">
+
+                0.00
+
+            </div>
+
+
+            <div class="stat-unit">
+
+                kg
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+
+                PERSONAL LOG
+
+            </div>
+
+
+            <div class="stat-number">
+
+                PRIVATE
+
+            </div>
+
+
+            <div class="stat-unit">
+
+                Your Data Only
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RANKING -->
+
+    <div class="ranking-card">
+
+
+        <div class="ranking-header">
+
+            <h2>
+
+                WEIGHT RANKING
+
+            </h2>
+
+
+            <span>
+
+                HEAVIEST CATCH
+
+            </span>
+
+        </div>
+
+
+        <div id="weightRanking">
+
+            <div class="empty-ranking">
+
+                ยังไม่มีข้อมูลการตกปลา
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="actions">
+
+
+        <a
+            href="add-fish.html"
+            class="action-btn primary">
+
+            + เพิ่มประวัติปลา
+
+        </a>
+
+
+        <a
+            href="history.html"
+            class="action-btn">
+
+            📖 ดูประวัติทั้งหมด
+
+        </a>
+
+    </div>
+
+
+</main>
+
+
+<footer>
+
+    FISHLOG // DIGITAL FISHING LOG SYSTEM
+
+</footer>
+
+
+<script src="app.js"></script>
+
+
+</body>
+
+</html>

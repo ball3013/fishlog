@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - FishLog</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="auth-page">
+
+    <div class="auth-box">
+
+        <div class="auth-logo">
+
+            <div class="icon">🎣</div>
+
+            <h1>FISHLOG</h1>
+
+            <p>DIGITAL FISHING LOG</p>
+
+        </div>
+
+        <form
+            class="auth-form"
+            onsubmit="return loginUser(event)"
+        >
+
+            <div class="input-group">
+
+                <label>USERNAME</label>
+
+                <input
+                    type="text"
+                    id="loginUsername"
+                    placeholder="Username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>PASSWORD</label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                LOGIN
+            </button>
+
+        </form>
+
+        <div class="auth-link">
+
+            ยังไม่มีบัญชี?
+
+            <a href="register.html">
+                สมัครสมาชิก
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

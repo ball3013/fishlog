@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>FishLog - สมัครสมาชิก</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d120d,
+                    #182016,
+                    #101510
+                );
+
+            color: #edf3e5;
+
+            font-family:
+                Arial,
+                "Segoe UI",
+                sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .box {
+
+            width: 100%;
+            max-width: 400px;
+
+            background: #1d251c;
+
+            border: 1px solid #596b3f;
+
+            border-top: 4px solid #a6ff00;
+
+            border-radius: 15px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+
+            text-align: center;
+
+            font-size: 36px;
+
+            font-weight: bold;
+
+            letter-spacing: 5px;
+
+            color: #a6ff00;
+
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #9ca893;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 25px;
+        }
+
+        .status {
+
+            display: none;
+
+            padding: 10px;
+
+            margin-bottom: 15px;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+
+            text-align: center;
+        }
+
+        .status.error {
+
+            display: block;
+
+            background: #3a1717;
+
+            border: 1px solid #ff5c5c;
+
+            color: #ff8c8c;
+        }
+
+        .status.success {
+
+            display: block;
+
+            background: #243316;
+
+            border: 1px solid #a6ff00;
+
+            color: #d6ff8a;
+        }
+
+        label {
+
+            display: block;
+
+            margin-top: 15px;
+
+            margin-bottom: 7px;
+
+            color: #d6ff8a;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+        input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            background: #111611;
+
+            color: #ffffff;
+
+            border: 1px solid #35422f;
+
+            border-radius: 7px;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        input:focus {
+
+            border-color: #a6ff00;
+
+            box-shadow:
+                0 0 0 2px rgba(166,255,0,0.1);
+        }
+
+        button {
+
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #596b3f;
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        button:hover {
+
+            background: #778d52;
+
+        }
+
+        button:active {
+
+            transform: scale(0.98);
+
+        }
+
+        .login {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #9ca893;
+
+            font-size: 14px;
+        }
+
+        .login a {
+
+            color: #a6ff00;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .login a:hover {
+
+            text-decoration: underline;
+        }
+
+        .system-test {
+
+            margin-top: 20px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #35422f;
+
+            text-align: center;
+
+            font-size: 11px;
+
+            color: #66705f;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="box">
+
+
+    <div class="logo">
+        FISHLOG
+    </div>
+
+
+    <div class="subtitle">
+        CREATE FISHING PROFILE
+    </div>
+
+
+    <div
+        id="status"
+        class="status">
+    </div>
+
+
+    <form id="registerForm">
+
+
+        <label for="name">
+            NAME
+        </label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="ชื่อของคุณ"
+            autocomplete="name"
+            required>
+
+
+        <label for="username">
+            USERNAME
+        </label>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            autocomplete="username"
+            required>
+
+
+        <label for="password">
+            PASSWORD
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            autocomplete="new-password"
+            required>
+
+
+        <label for="confirmPassword">
+            CONFIRM PASSWORD
+        </label>
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="ยืนยัน Password"
+            autocomplete="new-password"
+            required>
+
+
+        <button type="submit">
+            CREATE ACCOUNT
+        </button>
+
+
+    </form>
+
+
+    <div class="login">
+
+        มีบัญชีแล้ว?
+
+        <a href="login.html">
+            เข้าสู่ระบบ
+        </a>
+
+    </div>
+
+
+    <div class="system-test">
+
+        FISHLOG SYSTEM • PERSONAL FISHING LOG
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ==========================================
+   REGISTER USER
+========================================== */
+
+
+document
+    .getElementById("registerForm")
+    .addEventListener("submit", function(event) {
+
+
+        event.preventDefault();
+
+
+        /* -----------------------------
+           รับค่าจาก Form
+        ----------------------------- */
+
+        var name =
+            document
+                .getElementById("name")
+                .value
+                .trim();
+
+
+        var username =
+            document
+                .getElementById("username")
+                .value
+                .trim();
+
+
+        var password =
+            document
+                .getElementById("password")
+                .value;
+
+
+        var confirmPassword =
+            document
+                .getElementById("confirmPassword")
+                .value;
+
+
+        var status =
+            document.getElementById("status");
+
+
+        /* -----------------------------
+           ฟังก์ชันแสดงข้อความ
+        ----------------------------- */
+
+        function showError(message) {
+
+            status.className = "status error";
+
+            status.textContent = message;
+
+        }
+
+
+        function showSuccess(message) {
+
+            status.className = "status success";
+
+            status.textContent = message;
+
+        }
+
+
+        /* -----------------------------
+           ตรวจสอบข้อมูล
+        ----------------------------- */
+
+
+        if (name === "") {
+
+            showError("กรุณากรอกชื่อ");
+
+            return;
+
+        }
+
+
+        if (username === "") {
+
+            showError("กรุณากรอก Username");
+
+            return;
+
+        }
+
+
+        if (username.length < 3) {
+
+            showError(
+                "Username ต้องมีอย่างน้อย 3 ตัวอักษร"
+            );
+
+            return;
+
+        }
+
+
+        if (password === "") {
+
+            showError("กรุณากรอก Password");
+
+            return;
+
+        }
+
+
+        if (password.length < 4) {
+
+            showError(
+                "Password ต้องมีอย่างน้อย 4 ตัวอักษร"
+            );
+
+            return;
+
+        }
+
+
+        if (password !== confirmPassword) {
+
+            showError(
+                "Password ไม่ตรงกัน"
+            );
+
+            return;
+
+        }
+
+
+        /* -----------------------------
+           อ่านข้อมูล User เดิม
+        ----------------------------- */
+
+        var users = [];
+
+
+        try {
+
+            var oldUsers =
+                localStorage.getItem("fishUsers");
+
+
+            if (oldUsers) {
+
+                users =
+                    JSON.parse(oldUsers);
+
+            }
+
+
+            /* ถ้าข้อมูลไม่ใช่ Array */
+
+            if (!Array.isArray(users)) {
+
+                users = [];
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "อ่านข้อมูล fishUsers ไม่สำเร็จ",
+                error
+            );
+
+            users = [];
+
+        }
+
+
+        /* -----------------------------
+           ตรวจสอบ Username ซ้ำ
+        ----------------------------- */
+
+        var exists = false;
+
+
+        for (
+            var i = 0;
+            i < users.length;
+            i++
+        ) {
+
+
+            /* ป้องกันข้อมูลเก่าที่ไม่มี username */
+
+            var oldUsername =
+                users[i] &&
+                users[i].username
+                    ? String(users[i].username)
+                    : "";
+
+
+            if (
+                oldUsername.toLowerCase()
+                ===
+                username.toLowerCase()
+            ) {
+
+                exists = true;
+
+                break;
+
+            }
+
+        }
+
+
+        if (exists) {
+
+            showError(
+                "Username นี้มีอยู่แล้ว"
+            );
+
+            return;
+
+        }
+
+
+        /* -----------------------------
+           สร้าง User ใหม่
+        ----------------------------- */
+
+        var newUser = {
+
+            id:
+                String(Date.now()),
+
+            name:
+                name,
+
+            username:
+                username,
+
+            password:
+                password
+
+        };
+
+
+        /* -----------------------------
+           เพิ่ม User
+        ----------------------------- */
+
+        users.push(newUser);
+
+
+        /* -----------------------------
+           บันทึกลง LocalStorage
+        ----------------------------- */
+
+        try {
+
+            localStorage.setItem(
+                "fishUsers",
+                JSON.stringify(users)
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "บันทึกข้อมูลไม่สำเร็จ",
+                error
+            );
+
+            showError(
+                "ไม่สามารถบันทึกข้อมูลได้"
+            );
+
+            return;
+
+        }
+
+
+        /* -----------------------------
+           ตรวจสอบว่าบันทึกจริงหรือไม่
+        ----------------------------- */
+
+        var checkUsers;
+
+
+        try {
+
+            checkUsers =
+                JSON.parse(
+                    localStorage.getItem(
+                        "fishUsers"
+                    )
+                );
+
+        }
+
+        catch (error) {
+
+            checkUsers = [];
+
+        }
+
+
+        if (
+            !Array.isArray(checkUsers)
+            ||
+            checkUsers.length === 0
+        ) {
+
+            showError(
+                "บันทึกข้อมูลไม่สำเร็จ"
+            );
+
+            return;
+
+        }
+
+
+        /* -----------------------------
+           สำเร็จ
+        ----------------------------- */
+
+        showSuccess(
+            "สมัครสมาชิกสำเร็จ 🎣"
+        );
+
+
+        alert(
+            "สมัครสมาชิกสำเร็จ 🎣\n\n" +
+            "Username: " +
+            username
+        );
+
+
+        /* -----------------------------
+           ไปหน้า Login
+        ----------------------------- */
+
+        window.location.href =
+            "login.html";
+
+
+    });
+
+
+</script>
+
+
+</body>
+
+</html>

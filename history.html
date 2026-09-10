@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>FishLog - ประวัติการตกปลา</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                "Tahoma",
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #101510,
+                    #171d16,
+                    #101510
+                );
+
+            color: #edf3e5;
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+
+            background: #171d16;
+
+            border-bottom:
+                1px solid #35422f;
+
+            padding:
+                18px 25px;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 10;
+        }
+
+
+        .logo {
+
+            font-size: 23px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            color: #a6ff00;
+        }
+
+
+        .header-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            color: #9ca893;
+
+            font-size: 14px;
+        }
+
+
+        .home-button {
+
+            text-decoration: none;
+
+            background: #3f4e2c;
+
+            border:
+                1px solid #596b3f;
+
+            color: #edf3e5;
+
+            padding:
+                8px 14px;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+        }
+
+
+        .home-button:hover {
+
+            background: #596b3f;
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding:
+                30px 20px 50px;
+        }
+
+
+        .page-title {
+
+            margin-bottom: 25px;
+        }
+
+
+        .page-title h1 {
+
+            margin: 0;
+
+            font-size: 30px;
+
+            letter-spacing: 2px;
+
+            color: #edf3e5;
+        }
+
+
+        .page-title p {
+
+            margin:
+                8px 0 0;
+
+            color: #9ca893;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           STAT BOX
+        ========================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .stat-box {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1d251c,
+                    #222c20
+                );
+
+            border:
+                1px solid #35422f;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            text-align: center;
+        }
+
+
+        .stat-label {
+
+            color: #9ca893;
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+
+            font-weight: bold;
+        }
+
+
+        .stat-value {
+
+            margin-top: 8px;
+
+            color: #a6ff00;
+
+            font-size: 25px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           HISTORY LIST
+        ========================= */
+
+        #historyList {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 18px;
+        }
+
+
+        /* =========================
+           HISTORY CARD
+        ========================= */
+
+        .history-card {
+
+            position: relative;
+
+            display: grid;
+
+            grid-template-columns:
+                300px 1fr;
+
+            gap: 25px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1d251c,
+                    #222c20
+                );
+
+            border:
+                1px solid #35422f;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.25);
+
+            transition:
+                0.2s ease;
+        }
+
+
+        .history-card:hover {
+
+            border-color:
+                #596b3f;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =========================
+           PHOTO
+        ========================= */
+
+        .history-image-box {
+
+            width: 100%;
+
+            height: 220px;
+
+            border-radius: 9px;
+
+            overflow: hidden;
+
+            background: #101510;
+
+            border:
+                1px solid #35422f;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .history-fish-image {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+
+        .history-no-image {
+
+            font-size: 65px;
+
+            opacity: 0.7;
+        }
+
+
+        /* =========================
+           DETAILS
+        ========================= */
+
+        .history-info {
+
+            padding:
+                5px 55px 5px 0;
+        }
+
+
+        .detail-title {
+
+            color: #9ca893;
+
+            font-size: 12px;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .history-fish-name {
+
+            color: #a6ff00;
+
+            font-size: 26px;
+
+            font-weight: bold;
+
+            margin-bottom: 18px;
+        }
+
+
+        .detail-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .detail-item {
+
+            background: #171d16;
+
+            border:
+                1px solid #35422f;
+
+            border-radius: 7px;
+
+            padding:
+                11px 13px;
+        }
+
+
+        .detail-label {
+
+            display: block;
+
+            color: #778d52;
+
+            font-size: 11px;
+
+            margin-bottom: 4px;
+
+            text-transform: uppercase;
+        }
+
+
+        .detail-value {
+
+            color: #edf3e5;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           WEIGHT
+        ========================= */
+
+        .weight-badge {
+
+            display: inline-block;
+
+            background: #3f4e2c;
+
+            border:
+                1px solid #778d52;
+
+            color: #a6ff00;
+
+            padding:
+                9px 15px;
+
+            border-radius: 7px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           NOTE
+        ========================= */
+
+        .note-box {
+
+            background: #171d16;
+
+            border-left:
+                3px solid #596b3f;
+
+            padding:
+                10px 12px;
+
+            border-radius: 5px;
+
+            color: #9ca893;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           DELETE BUTTON
+        ========================= */
+
+        .delete-fish {
+
+            position: absolute;
+
+            right: 18px;
+
+            top: 18px;
+
+            background:
+                transparent;
+
+            border:
+                1px solid #7d3838;
+
+            color: #ff6b6b;
+
+            padding:
+                7px 11px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+        }
+
+
+        .delete-fish:hover {
+
+            background: #4a2424;
+
+            border-color:
+                #ff5c5c;
+
+            color: #fff;
+        }
+
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty-history {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1d251c,
+                    #222c20
+                );
+
+            border:
+                1px solid #35422f;
+
+            border-radius: 12px;
+
+            padding: 60px 20px;
+
+            text-align: center;
+
+            color: #9ca893;
+
+            font-size: 16px;
+        }
+
+
+        .empty-icon {
+
+            font-size: 55px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .add-button {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            text-decoration: none;
+
+            background: #596b3f;
+
+            border:
+                1px solid #778d52;
+
+            color: #a6ff00;
+
+            padding:
+                12px 20px;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .history-card {
+
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+            }
+
+
+            .history-image-box {
+
+                height: 250px;
+            }
+
+
+            .history-info {
+
+                padding:
+                    0 5px 5px;
+            }
+
+
+            .stats {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            header {
+
+                padding:
+                    14px 15px;
+            }
+
+
+            .logo {
+
+                font-size: 18px;
+            }
+
+
+            .header-right {
+
+                font-size: 11px;
+
+                gap: 7px;
+            }
+
+
+            .home-button {
+
+                padding:
+                    7px 9px;
+
+                font-size: 11px;
+            }
+
+
+            .container {
+
+                padding:
+                    22px 14px 40px;
+            }
+
+
+            .page-title h1 {
+
+                font-size: 24px;
+            }
+
+
+            .history-image-box {
+
+                height: 210px;
+            }
+
+
+            .history-fish-name {
+
+                font-size: 22px;
+            }
+
+
+            .detail-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .delete-fish {
+
+                right: 12px;
+
+                top: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        🎣 FISHLOG
+    </div>
+
+
+    <div class="header-right">
+
+        <span>
+            <strong data-user-name>
+                USER
+            </strong>
+        </span>
+
+
+        <a
+            href="index.html"
+            class="home-button">
+
+            DASHBOARD
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     CONTENT
+========================= -->
+
+<div class="container">
+
+
+    <div class="page-title">
+
+        <h1>
+            FISHING HISTORY
+        </h1>
+
+        <p>
+            ประวัติการตกปลาของคุณ
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         STATISTICS
+    ========================= -->
+
+    <div class="stats">
+
+
+        <div class="stat-box">
+
+            <div class="stat-label">
+                TOTAL CATCH
+            </div>
+
+            <div
+                class="stat-value"
+                id="historyTotal">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-box">
+
+            <div class="stat-label">
+                TOTAL WEIGHT
+            </div>
+
+            <div
+                class="stat-value"
+                id="historyWeight">
+                0.00 kg
+            </div>
+
+        </div>
+
+
+        <div class="stat-box">
+
+            <div class="stat-label">
+                BIGGEST CATCH
+            </div>
+
+            <div
+                class="stat-value"
+                id="historyBiggest">
+                0.00 kg
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         HISTORY
+    ========================= -->
+
+    <div id="historyList">
+
+        <!-- ข้อมูลจะแสดงจาก app.js -->
+
+    </div>
+
+
+</div>
+
+
+
+<script src="app.js"></script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        updateHistoryStats();
+
+    }
+);
+
+
+function updateHistoryStats() {
+
+    var fishList =
+        getFishList();
+
+    var total =
+        fishList.length;
+
+    var totalWeight = 0;
+
+    var biggest = 0;
+
+
+    fishList.forEach(
+        function (fish) {
+
+            var weight =
+                Number(
+                    fish.weight || 0
+                );
+
+            totalWeight += weight;
+
+            if (weight > biggest) {
+                biggest = weight;
+            }
+
+        }
+    );
+
+
+    var totalElement =
+        document.getElementById(
+            "historyTotal"
+        );
+
+    var weightElement =
+        document.getElementById(
+            "historyWeight"
+        );
+
+    var biggestElement =
+        document.getElementById(
+            "historyBiggest"
+        );
+
+
+    if (totalElement) {
+
+        totalElement.textContent =
+            total;
+
+    }
+
+
+    if (weightElement) {
+
+        weightElement.textContent =
+            totalWeight.toFixed(2) +
+            " kg";
+
+    }
+
+
+    if (biggestElement) {
+
+        biggestElement.textContent =
+            biggest.toFixed(2) +
+            " kg";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
